@@ -1,0 +1,83 @@
+package net.nekoyuni.SimpleEnemyMod.compat.cloth.common;
+
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.network.chat.Component;
+import net.nekoyuni.SimpleEnemyMod.config.common.AiShootingConfig;
+
+public class AiShootingClothConfig {
+   public static void setup(ConfigBuilder builder, ConfigEntryBuilder entryBuilder) {
+      ConfigCategory shooting = builder.getOrCreateCategory(Component.translatable("config.simpleenemymod.cat.ai_shooting"));
+      shooting.addEntry(
+         entryBuilder.startDoubleField(
+               Component.translatable("config.simpleenemymod.ai_shooting.max_shoot_distance"), (Double)AiShootingConfig.MAX_SHOOT_DISTANCE.get()
+            )
+            .setDefaultValue(90.0)
+            .setMin(10.0)
+            .setMax(368.0)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.max_shoot_distance.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MAX_SHOOT_DISTANCE.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startDoubleField(Component.translatable("config.simpleenemymod.ai_shooting.base_spread"), (Double)AiShootingConfig.BASE_SPREAD.get())
+            .setDefaultValue(1.4)
+            .setMin(0.0)
+            .setMax(10.0)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.base_spread.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.BASE_SPREAD.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startDoubleField(Component.translatable("config.simpleenemymod.ai_shooting.spread_increase"), (Double)AiShootingConfig.SPREAD_INCREASE.get())
+            .setDefaultValue(0.012)
+            .setMin(0.0)
+            .setMax(1.0)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.spread_increase.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.SPREAD_INCREASE.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startDoubleField(Component.translatable("config.simpleenemymod.ai_shooting.max_spread"), (Double)AiShootingConfig.MAX_SPREAD.get())
+            .setDefaultValue(1.2)
+            .setMin(0.0)
+            .setMax(10.0)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.max_spread.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MAX_SPREAD.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startIntSlider(Component.translatable("config.simpleenemymod.ai_shooting.min_burst"), (Integer)AiShootingConfig.MIN_BURST.get(), 1, 20)
+            .setDefaultValue(3)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.min_burst.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MIN_BURST.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startIntSlider(Component.translatable("config.simpleenemymod.ai_shooting.max_burst"), (Integer)AiShootingConfig.MAX_BURST.get(), 1, 30)
+            .setDefaultValue(5)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.max_burst.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MAX_BURST.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startIntSlider(
+               Component.translatable("config.simpleenemymod.ai_shooting.min_burst_cooldown"), (Integer)AiShootingConfig.MIN_BURST_COOLDOWN.get(), 0, 200
+            )
+            .setDefaultValue(10)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.min_burst_cooldown.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MIN_BURST_COOLDOWN.set(newValue))
+            .build()
+      );
+      shooting.addEntry(
+         entryBuilder.startIntSlider(
+               Component.translatable("config.simpleenemymod.ai_shooting.max_burst_cooldown"), (Integer)AiShootingConfig.MAX_BURST_COOLDOWN.get(), 0, 400
+            )
+            .setDefaultValue(15)
+            .setTooltip(new Component[]{Component.translatable("config.simpleenemymod.ai_shooting.max_burst_cooldown.tooltip")})
+            .setSaveConsumer(newValue -> AiShootingConfig.MAX_BURST_COOLDOWN.set(newValue))
+            .build()
+      );
+   }
+}
