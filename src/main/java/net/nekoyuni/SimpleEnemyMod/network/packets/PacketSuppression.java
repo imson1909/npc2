@@ -1,0 +1,34 @@
+package net.nekoyuni.SimpleEnemyMod.network.packets;
+
+import java.util.function.Supplier;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.network.NetworkEvent.Context;
+import net.nekoyuni.SimpleEnemyMod.network.ClientPacketHandler;
+
+public class PacketSuppression {
+   private final float amount;
+
+   public PacketSuppression(float amount) {
+      this.amount = amount;
+   }
+
+   public static void encode(PacketSuppression msg, FriendlyByteBuf buf) {
+      buf.writeFloat(msg.amount);
+   }
+
+   public static PacketSuppression decode(FriendlyByteBuf buf) {
+      return new PacketSuppression(buf.readFloat());
+   }
+
+   public static void handle(PacketSuppression msg, Supplier<Context> ctx) {
+      Context context = ctx.get();
+      context.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handleSuppression(msg)));
+      context.setPacketHandled(true);
+   }
+
+   public float getAmount() {
+      return this.amount;
+   }
+}
