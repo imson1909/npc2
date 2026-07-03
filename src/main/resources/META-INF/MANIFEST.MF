@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Specification-Title: simpleenemymod
-Specification-Vendor: NekoYuni
-Specification-Version: 1
-Implementation-Title: SimpleEnemyMod - Git
-Implementation-Version: 1.20.1-0.1.5-beta
-Implementation-Vendor: NekoYuni
-Implementation-Timestamp: 2026-06-20T19:02:58-0400
-
